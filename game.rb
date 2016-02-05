@@ -32,7 +32,8 @@ def confirm_answer(player, player_answer, actual_answer)
   else
     puts "WRONG!".red
     player[:lives] -= 1
-    puts "#{@player1[:name]} has #{@player1[:lives]} lives left! #{@player2[:name]} has #{@player2[:lives]} lives left!".red
+    puts "#{@player1[:name]} has #{@player1[:lives]} lives left! 
+    #{@player2[:name]} has #{@player2[:lives]} lives left!".red
   end
 end
 
