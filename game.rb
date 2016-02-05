@@ -32,14 +32,14 @@ def confirm_answer(player, player_answer, actual_answer)
   else
     puts "WRONG!".red
     player[:lives] -= 1
-    puts "Player 1 has #{@player1[:lives]} lives! Player 2 has #{@player2[:lives]} lives!".blue
+    puts "#{@player1[:name]} has #{@player1[:lives]} lives left! #{@player2[:name]} has #{@player2[:lives]} lives left!".red
   end
 end
 
 def start_game
   puts "WELCOME TO MATH HELL!".red
 
-  if @player1[:name] == "Player 1" || @player2[:name] == "Player 2"
+  if @player1[:name] == "Player 1"
     add_names
   end
 
@@ -62,9 +62,9 @@ def victory_ceremony
   winner = @players.find do |player|
     player[:lives] != 0
   end
-  puts "Congratulations #{winner[:name]}!".green
-  puts "#{@player1[:name]}, your total score is #{@player1[:score]}. 
-  #{@player2[:name]}, your total score is #{@player2[:score]}.".blue
+  puts "Congratulations #{winner[:name]}, you survived!".green
+  puts "#{@player1[:name]}, your total score is #{@player1[:score]}! 
+  #{@player2[:name]}, your total score is #{@player2[:score]}!".green
   
   puts "Would you like to play another game?".blue
   response = gets.chomp
