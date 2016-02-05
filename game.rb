@@ -15,6 +15,36 @@ require 'colorize'
   }
 ]
 
+def start_game
+  puts "WELCOME TO MATH HELL!".red
+
+  if @player1[:name] == "Player 1"
+    add_names
+  end
+
+  while true
+    question_generator(@player1)
+    if @player1[:lives] == 0
+      break
+    end
+
+    question_generator(@player2)
+    if @player2[:lives] == 0
+      break
+    end
+  end
+
+  victory_ceremony
+  restart?
+end
+
+def add_names
+  puts "Player 1, what is your name?".blue
+  @player1[:name] = gets.chomp
+  puts "Player 2, what is your name?".blue
+  @player2[:name] = gets.chomp
+end
+
 def question_generator(player)
   x = rand(1..20)
   y = rand(1..20)
@@ -37,28 +67,6 @@ def confirm_answer(player, player_answer, actual_answer)
   end
 end
 
-def start_game
-  puts "WELCOME TO MATH HELL!".red
-
-  if @player1[:name] == "Player 1"
-    add_names
-  end
-
-  while true
-    question_generator(@player1)
-    if @player1[:lives] == 0
-      break
-    end
-
-    question_generator(@player2)
-    if @player2[:lives] == 0
-      break
-    end
-  end
-
-  victory_ceremony
-end
-
 def victory_ceremony
   winner = @players.find do |player|
     player[:lives] != 0
@@ -66,21 +74,16 @@ def victory_ceremony
   puts "Congratulations #{winner[:name]}, you survived!".green
   puts "#{@player1[:name]}, your total score is #{@player1[:score]}! 
   #{@player2[:name]}, your total score is #{@player2[:score]}!".green
-  
+end
+
+def restart?
   puts "Would you like to play another game?".blue
   response = gets.chomp
-  if response == "yes"
+  if response.downcase == "yes"
     @player1[:lives] = 3
     @player2[:lives] = 3
     start_game
   end
-end
-
-def add_names
-  puts "Player 1, what is your name?".blue
-  @player1[:name] = gets.chomp
-  puts "Player 2, what is your name?".blue
-  @player2[:name] = gets.chomp
 end
 
 start_game
